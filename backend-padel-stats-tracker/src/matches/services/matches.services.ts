@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { Repository } from 'typeorm/browser/repository/Repository.js';
+import { Repository } from 'typeorm';
 import { Match } from '../entities/match.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { UpdateMatchDto } from '../dto/update-match.dto';
