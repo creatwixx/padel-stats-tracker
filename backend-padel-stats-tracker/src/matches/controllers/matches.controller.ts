@@ -1,12 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  Put,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { MatchesService } from '../services/matches.services';
 import { UpdateMatchDto } from '../dto/update-match.dto';
 import { CreateMatchDto } from '../dto/create-match.dto';

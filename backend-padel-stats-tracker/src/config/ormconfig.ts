@@ -1,5 +1,4 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-import { Match } from '../matches/entities/match.entity';
 
 export const typeOrmConfig: TypeOrmModuleOptions = {
   type: 'postgres',
