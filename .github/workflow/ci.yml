@@ -13,49 +13,43 @@ jobs:
   backend-lint-and-build:
     name: Backend Lint & Build
     runs-on: ubuntu-latest
+    if: >
+      contains(github.event.pull_request.head.ref, 'backend') ||
+      contains(join(github.event.pull_request.changed_files.*.filename), 'backend-padel-stats-tracker/') ||
+      contains(join(github.event.head_commit.modified, ' '), 'backend-padel-stats-tracker/') ||
+      contains(join(github.event.head_commit.added, ' '), 'backend-padel-stats-tracker/') ||
+      contains(join(github.event.head_commit.removed, ' '), 'backend-padel-stats-tracker/')
     defaults:
       run:
         working-directory: backend-padel-stats-tracker
     steps:
-      - name: 🧩 Checkout repository
-        uses: actions/checkout@v4
-
-      - name: 🛠 Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'yarn'
-
-      - name: 📦 Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: 🔍 Lint
-        run: yarn lint
-
-      - name: 🏗️ Build
-        run: yarn build
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint
+      - run: yarn build
 
   frontend-lint-and-build:
     name: Frontend Lint & Build
     runs-on: ubuntu-latest
+    if: >
+      contains(github.event.pull_request.head.ref, 'frontend') ||
+      contains(join(github.event.pull_request.changed_files.*.filename), 'frontend-padel-stats-tracker/') ||
+      contains(join(github.event.head_commit.modified, ' '), 'frontend-padel-stats-tracker/') ||
+      contains(join(github.event.head_commit.added, ' '), 'frontend-padel-stats-tracker/') ||
+      contains(join(github.event.head_commit.removed, ' '), 'frontend-padel-stats-tracker/')
     defaults:
       run:
         working-directory: frontend-padel-stats-tracker
     steps:
-      - name: 🧩 Checkout repository
-        uses: actions/checkout@v4
-
-      - name: 🛠 Setup Node.js
-        uses: actions/setup-node@v3
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v3
         with:
           node-version: 18
           cache: 'yarn'
-
-      - name: 📦 Install dependencies
-        run: yarn install --frozen-lockfile
-
-      - name: 🔍 Lint
-        run: yarn lint || true
-
-      - name: 🏗️ Build
-        run: yarn build
+      - run: yarn install --frozen-lockfile
+      - run: yarn lint || true
+      - run: yarn build
