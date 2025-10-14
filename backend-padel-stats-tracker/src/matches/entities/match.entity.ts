@@ -17,7 +17,7 @@ export class Match {
   location!: string;
 
   @Column({ nullable: true })
-  partner!: string;
+  partner?: string;
 
   @Column({ type: 'enum', enum: ['win', 'loss'] })
   result!: 'win' | 'loss';
