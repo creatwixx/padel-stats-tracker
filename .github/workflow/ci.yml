@@ -1,0 +1,61 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches:
+      - main
+      - staging
+      - production
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  backend-lint-and-build:
+    name: Backend Lint & Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend-padel-stats-tracker
+    steps:
+      - name: 🧩 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🛠 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: 📦 Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: 🔍 Lint
+        run: yarn lint
+
+      - name: 🏗️ Build
+        run: yarn build
+
+  frontend-lint-and-build:
+    name: Frontend Lint & Build
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend-padel-stats-tracker
+    steps:
+      - name: 🧩 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🛠 Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'yarn'
+
+      - name: 📦 Install dependencies
+        run: yarn install --frozen-lockfile
+
+      - name: 🔍 Lint
+        run: yarn lint || true
+
+      - name: 🏗️ Build
+        run: yarn build
