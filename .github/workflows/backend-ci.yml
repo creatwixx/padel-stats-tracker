@@ -23,7 +23,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           cache: 'yarn'
           cache-dependency-path: backend-padel-stats-tracker/yarn.lock
       - run: yarn install --frozen-lockfile
