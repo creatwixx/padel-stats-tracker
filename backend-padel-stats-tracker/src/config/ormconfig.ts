@@ -9,5 +9,5 @@ export const typeOrmConfig: TypeOrmModuleOptions = {
   password: process.env.DB_PASSWORD || 'padel_pass',
   database: process.env.DB_NAME || 'padel_stats',
   autoLoadEntities: true,
-  synchronize: true,
+  synchronize: process.env.NODE_ENV !== 'production',
 };
