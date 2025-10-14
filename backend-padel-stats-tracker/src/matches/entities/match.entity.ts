@@ -23,7 +23,7 @@ export class Match {
   result!: 'win' | 'loss';
 
   @Column({ nullable: true })
-  score!: string;
+  score?: string;
 
   @CreateDateColumn()
   created_at!: Date;
