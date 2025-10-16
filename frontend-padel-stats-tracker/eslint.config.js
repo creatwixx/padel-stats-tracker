@@ -16,9 +16,6 @@ export default [
     },
     languageOptions: {
       parser: tseslint.parser,
-      parserOptions: {
-        project: ['./tsconfig.json'],
-      },
     },
     rules: {
       'prettier/prettier': ['error', { endOfLine: 'auto' }],
