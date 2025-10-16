@@ -1,0 +1,13 @@
+{
+  "Servers": {
+    "1": {
+      "Name": "Padel DB",
+      "Group": "Servers",
+      "Port": 5432,
+      "Username": "padel_user",
+      "Host": "padel_db",
+      "SSLMode": "prefer",
+      "MaintenanceDB": "postgres"
+    }
+  }
+}

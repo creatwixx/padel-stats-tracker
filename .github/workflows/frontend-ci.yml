@@ -25,7 +25,7 @@ jobs:
         with:
           node-version: 20
           cache: 'yarn'
-          cache-dependency-path: frontend-padel-stats-tracker/yarn.loc
+          cache-dependency-path: frontend-padel-stats-tracker/yarn.lock
       - run: yarn install --frozen-lockfile
       - run: yarn lint || true
       - run: yarn build

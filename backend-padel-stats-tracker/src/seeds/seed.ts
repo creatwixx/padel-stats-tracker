@@ -1,23 +1,16 @@
 import { DataSource, DeepPartial } from 'typeorm';
 import { Match } from '../matches/entities/match.entity';
 
-const AppDataSource = new DataSource({
-  type: 'postgres',
-  host: process.env.DB_HOST || 'localhost',
-  port: parseInt(process.env.DB_PORT || '5432'),
-  username: process.env.DB_USER || 'padel_user',
-  password: process.env.DB_PASSWORD || 'padel_pass',
-  database: process.env.DB_NAME || 'padel_stats',
-  entities: [Match],
-  synchronize: false,
-});
+export const seed = async (dataSource: DataSource) => {
+  const matchRepo = dataSource.getRepository(Match);
 
-const seed = async () => {
-  await AppDataSource.initialize();
+  const existingCount = await matchRepo.count();
+  if (existingCount > 0) {
+    console.log('Database already seeded, skipping.');
+    return;
+  }
 
   console.log('Connected to database, seeding data...');
-
-  const matchRepo = AppDataSource.getRepository(Match);
 
   const matches: DeepPartial<Match>[] = [
     {
@@ -43,14 +36,6 @@ const seed = async () => {
     },
   ];
 
-  const entities = matchRepo.create(matches);
-  await matchRepo.save(entities);
-
-  console.log('Seed completed successfully!');
-  await AppDataSource.destroy();
+  await matchRepo.save(matches);
+  console.log('Database seeded successfully!');
 };
-
-seed().catch((err) => {
-  console.error('Seeding failed:', err);
-  process.exit(1);
-});
