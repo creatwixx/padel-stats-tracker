@@ -50,8 +50,8 @@ export function GenericTable<T>({ columns, data, getRowKey }: GenericTableProps<
                 if (col.getValue) {
                   content = col.getValue(row);
                 } else if (col.accessor) {
-                  // Safe: col.accessor is checked above and is keyof T
-                  content = row[col.accessor as keyof T] ?? '—';
+                  const value = row[col.accessor];
+                  content = (value ?? '—') as React.ReactNode;
                 }
                 return (
                   <TableCell key={col.key} align={col.align ?? 'left'} sx={{ color: 'grey.100' }}>
